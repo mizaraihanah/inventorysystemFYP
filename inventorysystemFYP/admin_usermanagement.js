@@ -44,10 +44,12 @@ document.addEventListener("DOMContentLoaded", function () {
             method: "POST",
             body: formData
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
-            alert(data);
-            location.reload(); // Reload to show new user
+            alert(data.message);
+            if (data.success) {
+                location.reload(); // Reload to show new user
+            }
         })
         .catch(error => console.error("Error:", error));
     });
@@ -59,12 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("User ID for editing: " + userID);  // Log to confirm userID
 
             // Fetch user data when edit button is clicked
-            fetch(`fetch_user.php?userID=${userID}`)
+            fetch(`admin_getuser.php?userID=${userID}`)
                 .then(response => response.json())
                 .then(data => {
                     console.log("Fetched user data:", data);  // Log to confirm data
 
-                    if (data.success) {
+                    if (!data.error) {
                         // Populate the update form fields with fetched data
                         document.getElementById("updateUserID").value = data.userID;
                         document.getElementById("updateFullName").value = data.fullName;
@@ -76,10 +78,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         // Show the modal for updating user
                         updateUserModal.style.display = "block";
                     } else {
-                        alert("Failed to fetch user data.");
+                        alert("Failed to fetch user data: " + data.error);
                     }
                 })
-                .catch(error => console.error("Error fetching user data:", error));
+                .catch(error => {
+                    console.error("Error fetching user data:", error);
+                    alert("An error occurred while fetching user data. Please try again.");
+                });
         });
     });
 
@@ -98,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert(data.message);  // Show the success/error message
             if (data.success) {
                 updateUserModal.style.display = "none";  // Close the modal
-                location.reload(); // Optionally reload the page to see updated user data
+                location.reload(); // Reload the page to see updated user data
             }
         })
         .catch(error => console.error("Error:", error));
@@ -114,10 +119,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
                     body: `userID=${userID}`
                 })
-                .then(response => response.text())
+                .then(response => response.json())
                 .then(data => {
-                    alert(data);
-                    location.reload();
+                    alert(data.message);
+                    if (data.success) {
+                        location.reload();
+                    }
                 })
                 .catch(error => console.error("Error:", error));
             }
