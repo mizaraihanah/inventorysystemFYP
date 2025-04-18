@@ -169,26 +169,25 @@ $conn->close();
                 </form>
             </div>
         </div>
-
-        <!-- User List -->
-        <div class="user-container" id="userCardsContainer">
-            <?php while ($row = $result_users->fetch_assoc()) { ?>
-                <div class="user-card">
-                    <div class="user-info">
-                        <h3><?php echo htmlspecialchars($row['fullName']); ?></h3>
-                        <p><strong>Username:</strong> <?php echo htmlspecialchars($row['username']); ?></p>
-                        <p><strong>Email:</strong> <?php echo htmlspecialchars($row['email']); ?></p>
-                        <p><strong>Phone:</strong> <?php echo htmlspecialchars($row['phoneNumber']); ?></p>
-                        <p><strong>Address:</strong> <?php echo htmlspecialchars($row['address']); ?></p>
-                        <p><strong>Role:</strong> <?php echo htmlspecialchars($row['role']); ?></p>
-                    </div>
-                    <div class="user-actions">
-                        <button class="edit-btn" data-id="<?php echo $row['userID']; ?>" title="Edit User">
-                            <i class="fas fa-edit"></i> Edit
-                        </button>
-                        <button class="delete-btn" data-id="<?php echo $row['userID']; ?>" title="Delete User">
-                            <i class="fas fa-trash"></i> Delete
-                        </button>
+<!-- User List -->
+<div class="user-container" id="userCardsContainer">
+    <?php while ($row = $result_users->fetch_assoc()) { ?>
+        <div class="user-card">
+            <div class="user-info">
+                <h3><?php echo htmlspecialchars($row['fullName']); ?></h3>
+                <p><strong>Username:</strong> <?php echo htmlspecialchars($row['username']); ?></p>
+                <p><strong>Email:</strong> <?php echo htmlspecialchars($row['email']); ?></p>
+                <p><strong>Phone:</strong> <?php echo htmlspecialchars($row['phoneNumber']); ?></p>
+                <p><strong>Address:</strong> <?php echo htmlspecialchars($row['address']); ?></p>
+                <p><strong>Role:</strong> <?php echo htmlspecialchars($row['role']); ?></p>
+            </div>
+            <div class="user-actions">
+                <button class="edit-btn" data-id="<?php echo $row['userID']; ?>" title="Edit User">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="delete-btn" data-id="<?php echo $row['userID']; ?>" title="Delete User">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
                     </div>
                 </div>
             <?php } ?>
